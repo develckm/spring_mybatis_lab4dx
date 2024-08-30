@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace : 맵핑할 인터페이스-->
+<!--
+    List<Order> findOrders();
+    List<Order> findByCustomerId(int customerId);
+    Order findByOrderId(int orderId);
+    int removeByOrderId(int orderId);
+    int update(Order order);
+    int save(Order order);
+-->
+<mapper namespace="com.lab4dx.s04_mybatis.mapper.OrderMapper">
+    <!-- table의 칼럼이름과 dto의 필드명이 다를때 파싱    -->
+    <resultMap id="OrderMap" type="com.lab4dx.s04_mybatis.dto.Order">
+        <id column="ORDER_ID" property="orderId"/>
+        <result column="ORDER_DATE" property="orderDate"/>
+        <result column="CUSTOMER_ID" property="customerId"/>
+        <result column="PRODUCT_ID" property="productId"/>
+        <result column="QUANTITY" property="quantity"/>
+    </resultMap>
+    <select id="findOrders" resultType="com.lab4dx.s04_mybatis.dto.Order">
+        SELECT
+            ORDER_ID as orderId,
+            ORDER_DATE as orderDate,
+            CUSTOMER_ID as customerId,
+            PRODUCT_ID as productId,
+            QUANTITY
+        FROM ORDERS
+    </select>
+    <select id="findByCustomerId" resultMap="OrderMap">
+        SELECT * FROM ORDERS WHERE CUSTOMER_ID=#{customerId}
+    </select>
+</mapper>
