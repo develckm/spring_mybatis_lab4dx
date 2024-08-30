@@ -20,6 +20,19 @@
         <result column="PRODUCT_ID" property="productId"/>
         <result column="QUANTITY" property="quantity"/>
     </resultMap>
+    <insert id="save">
+        INSERT INTO ORDERS (ORDER_ID, CUSTOMER_ID, PRODUCT_ID, QUANTITY)
+        VALUES (#{orderId}, #{customerId}, #{productId}, #{quantity})
+    </insert>
+    <!-- 파라미터 타입은 생략해도 문제없다.(하면 명시적)   -->
+    <update id="update">
+        UPDATE ORDERS SET QUANTITY=#{quantity} WHERE ORDER_ID=#{orderId}
+    </update>
+
+    <delete id="removeByOrderId">
+        DELETE FROM ORDERS WHERE ORDER_ID=#{orderId}
+    </delete>
+
     <select id="findOrders" resultType="com.lab4dx.s04_mybatis.dto.Order">
         SELECT
             ORDER_ID as orderId,
@@ -31,5 +44,8 @@
     </select>
     <select id="findByCustomerId" resultMap="OrderMap">
         SELECT * FROM ORDERS WHERE CUSTOMER_ID=#{customerId}
+    </select>
+    <select id="findByOrderId" resultMap="OrderMap">
+        SELECT * FROM ORDERS WHERE ORDER_ID=#{orderId}
     </select>
 </mapper>

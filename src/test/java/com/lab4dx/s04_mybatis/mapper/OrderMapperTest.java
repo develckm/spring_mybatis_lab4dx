@@ -1,5 +1,6 @@
 package com.lab4dx.s04_mybatis.mapper;
 
+import com.lab4dx.s04_mybatis.dto.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -9,7 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderMapperTest {
     @Autowired
     private OrderMapper orderMapper;
-
+    @Test
+    void save() {
+        Order order = new Order();
+        order.setOrderId(999);
+        order.setCustomerId(1); //fk 는 있는 고객만 참조 가능
+        order.setProductId(1);
+        order.setQuantity(5);
+        int save=orderMapper.save(order);
+        System.out.println(save);
+    }
     @Test
     void findOrders() {
         System.out.println(orderMapper.findOrders());
@@ -32,7 +42,5 @@ class OrderMapperTest {
     void update() {
     }
 
-    @Test
-    void save() {
-    }
+
 }
