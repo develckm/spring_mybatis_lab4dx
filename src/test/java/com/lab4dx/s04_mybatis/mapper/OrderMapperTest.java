@@ -32,15 +32,27 @@ class OrderMapperTest {
 
     @Test
     void findByOrderId() {
+        System.out.println(orderMapper.findByOrderId(999));
+    }
+
+
+    @Test
+    void update() {
+        Order order = new Order();
+        order.setOrderId(999);
+        order.setQuantity(1); //수량을 5개에서 1개로 수정
+        int update=orderMapper.update(order);
+        System.out.println(update);
+        System.out.println(orderMapper.findByOrderId(999));
+
     }
 
     @Test
     void removeByOrderId() {
-    }
+        int remove=orderMapper.removeByOrderId(999);
+        System.out.println(remove);
+        System.out.println(orderMapper.findByOrderId(999));
 
-    @Test
-    void update() {
     }
-
 
 }

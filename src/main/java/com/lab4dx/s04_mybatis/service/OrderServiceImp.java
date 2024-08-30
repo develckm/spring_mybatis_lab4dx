@@ -24,21 +24,21 @@ public class OrderServiceImp implements OrderService {
     @Transactional //자동으로 오류발생시 rollback
     @Override
     public Order readOne(int id) {
-        return null;
+        return orderMapper.findByOrderId(id);
     }
 
     @Override
     public int remove(int id) {
-        return 0;
+        return orderMapper.removeByOrderId(id);
     }
 
     @Override
     public int modify(Order order) {
-        return 0;
+        return orderMapper.update(order);
     }
 
     @Override
     public int register(Order order) {
-        return 0;
+        return orderMapper.save(order);
     }
 }
